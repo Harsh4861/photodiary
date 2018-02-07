@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>PhotoDiary</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js">
+
+        <link rel="stylesheet" href="/stylesheets/main.css">
+       <style>
+           .img-thumbnail img {
+    
+    max-width: 100%;
+    
+}
+   .form{
+       text-align:center;
+       width:100%;
+   }
+   body{
+       background-image:url(https://wallpaperscraft.com/image/tent_camping_mountains_sunset_110237_1920x1080.jpg);
+       background-size:cover;
+  /*     width: 100%;*/
+  /*height: 100%;*/
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  background-size: cover;
+  /*background-position: 50% 50%;*/
+  /*background-repeat: no-repeat;*/
+ 
+  z-index: 0;
+   }
+   .white{
+       color:white;
+   }
+   .jumbotron{
+       /*background-image:url(https://www.hdwallpapers.in/walls/actress_danielle_campbell-wide.jpg);*/
+       /*background-size: cover;*/
+       background-color:rgba(33, 150, 243, 0.4);
+       /*color:white;*/
+   }
+       </style>
+    </header>
+    <body>
+       
+        <nav class="navbar navbar-inverse bg-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a style="color: white;margin-left:65px;" class="navbar-brand" href="/">PhotoDiary</a>
+        </div>
+        <div style="margin-right:65px;" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+               <% if(!currentUser){ %>
+                <li><a style="color: white;" href="/login">Login</a></li>
+                <li><a style="color: white;" href="/register">SignUp</a></li>
+                <% }else {%>
+                <li><a style="color: white;" class="#">Signed In As <%= currentUser.username %></a></li>
+                <li><a style="color: white;" href="/logout">Logout</a></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    
+</nav>
+            <div style="margin-top:80px;" class="container">
+                <% if(error && error.length> 0){ %> 
+                <div class="alert alert-danger" role="alert">
+            <%= error %>
+                </div>
+                <% } %>
+                <% if(success && success.length> 0){ %> 
+                <div class="alert alert-success" role="alert">
+             <%= success %>
+                </div>
+               
+                <% } %>
+            </div>
+        
+        
