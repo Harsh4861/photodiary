@@ -16,7 +16,8 @@ var commentRoutes           = require("./routes/comment.js");
 var campgroundsRoutes       = require("./routes/campgrounds.js");
 var indexRoutes             = require("./routes/index.js");
 
-mongoose.connect("mongodb://localhost/photodiary");
+mongoose.connect("mongodb://harsh:harsh@ds225608.mlab.com:25608/photodiary");
+// mongoose.connect("mongodb://localhost/photodiary");
 
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
