@@ -55,5 +55,8 @@ app.use(indexRoutes);
 //start a server
 
 app.listen(8080, '10.128.0.2', function(){
-   console.log("Server has started!!"); 
+  console.log("Server has started!!"); 
 });
+// app.listen(process.env.PORT,process.env.IP, function(){
+//   console.log("Server has started!!"); 
+// });
