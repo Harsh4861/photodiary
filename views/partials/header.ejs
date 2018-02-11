@@ -5,8 +5,12 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
-
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <link rel="stylesheet" href="/stylesheets/main.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
         
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113744389-1"></script>
@@ -46,9 +50,11 @@
        color:white;
    }
    .jumbotron{
-       /*background-image:url(https://www.hdwallpapers.in/walls/actress_danielle_campbell-wide.jpg);*/
+       /*background-image:url(http://www.samsung.com/global/galaxy/galaxy-s7/camera/images/galaxy-s7_camera_dual_pixel.jpg);*/
        /*background-size: cover;*/
        background-color:rgba(33, 150, 243, 0.4);
+       
+       /*padding-bottom:15px;*/
        /*color:white;*/
    }
        </style>
@@ -57,19 +63,33 @@
        
         <nav class="navbar navbar-inverse bg-default navbar-fixed-top">
     <div class="container-fluid">
+        <div class="container">
         <div class="navbar-header">
-            <a style="color: white;margin-left:65px;" class="navbar-brand" href="/">PhotoDiary</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#harsh" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+            <a style="color: white;" class="navbar-brand" href="/"><span style="color:white;" class="glyphicon glyphicon-camera" aria-hidden="true"></span>      PhotoDiary</a>
+            <!--<a style="color: white;" class="navbar-brand" href="/diary">Home</a>-->
         </div>
-        <div style="margin-right:65px;" class="collapse navbar-collapse">
+  <!--      <div  class="nav navbar-nav">-->
+		<!--	<li><a style="color: white;" href="#">Home</a></li>-->
+		<!--</div>-->
+        <div class="collapse navbar-collapse" id="harsh">
             <ul class="nav navbar-nav navbar-right">
                <% if(!currentUser){ %>
+                <li><a style="color: white;" href="/diary">Home</a></li>
                 <li><a style="color: white;" href="/login">Login</a></li>
                 <li><a style="color: white;" href="/register">SignUp</a></li>
                 <% }else {%>
+                <li><a style="color: white;" href="/diary">Home</a></li>
                 <li><a style="color: white;" class="#">Signed In As <%= currentUser.username %></a></li>
                 <li><a style="color: white;" href="/logout">Logout</a></li>
                 <% } %>
             </ul>
+        </div>
         </div>
     </div>
     

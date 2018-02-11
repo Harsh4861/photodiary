@@ -4,6 +4,29 @@
 var express = require("express");
 var router = express.Router();
 var Campground = require("../models/photodiary.js");
+// multer image upload
+var multer = require('multer');
+var storage = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter})
+
+// setup clodinary
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: 'photodiary', 
+  api_key:"168924283782911", 
+  api_secret:"gIZ5Ug563uok7P6RZNtB3SN-XCQ"
+});
 
 //show all photo
 router.get("/diary", function(req, res){
@@ -19,7 +42,34 @@ router.get("/diary", function(req, res){
     
 });
 //create a photo
-router.post("/campgrounds", function(req, res){
+router.post("/campgrounds",isLoggedIn,upload.single('image'), function(req, res){
+    // var title=req.body.name;
+    // var image=req.body.image;
+    // var desc=req.body.description;
+    // var author = {
+    //     id:req.user._id,
+    //     username:req.user.username
+    // };
+    // var results = {title:title, image:image,description:desc, author:author};
+    // console.log(results);
+    // Campground.create(results,function(err, newcampgroound)
+    // {
+    //     if(err){
+    //         req.flash("error", "Something went wrong")
+    //         console.log("something went wrong");
+    //     }else{
+    //         req.flash("success", "Photo uploaded successfully!")
+    //         res.redirect("/diary");
+    //     }
+    // });
+    cloudinary.uploader.upload(req.file.path, function(result) {
+  // add cloudinary url for the image to the campground object under image property
+  req.body.image = result.secure_url;
+  // add author to campground
+//   req.body.campground.author = {
+//     id: req.user._id,
+//     username: req.user.username
+//   }
     var title=req.body.name;
     var image=req.body.image;
     var desc=req.body.description;
@@ -28,24 +78,22 @@ router.post("/campgrounds", function(req, res){
         username:req.user.username
     };
     var results = {title:title, image:image,description:desc, author:author};
-    console.log(results);
-    Campground.create(results,function(err, newcampgroound)
-    {
-        if(err){
-            req.flash("error", "Something went wrong")
-            console.log("something went wrong");
-        }else{
-            req.flash("success", "Photo uploaded successfully!")
-            res.redirect("/diary");
-        }
-    });
+  Campground.create(results, function(err, campground) {
+    if (err) {
+      req.flash('error', err.message);
+      return res.redirect('back');
+    }
+    req.flash("success", "Photo uploaded successfully!")
+    res.redirect('/diary');
+  });
+});
     
 });
 //photo form
 router.get("/diary/new",isLoggedIn, function(req, res){
     res.render("diary/new.ejs");
 });
-//shows more info about one campground
+//shows more info about one photo
 router.get("/diary/:id", function(req, res){
     //find the campground with provided ID
     Campground.findById(req.params.id).populate("comments").exec( function(err, foundCampground){
