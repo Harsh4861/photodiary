@@ -12,15 +12,15 @@
         <div class="container">
         <div class="row text-centre" style="display:flex;flex-wrap:wrap;">
              <% campgrounds.reverse().forEach(function(campground){ %>
-            <div class="col-md-3 col-sm-6">
-                <div class="img-thumbnail">
+            <div class="col-xs-4 col-md-3 col-sm-6">
+                <div style="border:1px solid rgba(2, 23, 39,0.8);" class="img-thumbnail">
                          <a href="/diary/<%= campground._id %>"><img style="border:none;" src ="<%= campground.image %>"></a>
-                    <div class="caption text-centre">
-                        <strong style="margin-left:10px"><%= campground.title %></strong>
+                    <div style="background-color:rgba(2, 23, 39,0.8);" class="caption text-centre">
+                        <strong style="color:white;" style="margin-left:10px"><%= campground.title %></strong>
                     </div>
-                    <p>
-                        <a style="background-color:#021727;border:none;margin-left:10px;" href="/diary/<%= campground._id %>" class="btn btn-xs btn-primary btn-large">View</a>
-                    </p>
+                    <!--<p>-->
+                    <!--    <a style="background-color:#021727;border:none;margin-left:10px;" href="/diary/<%= campground._id %>" class="btn btn-xs btn-primary btn-large">View</a>-->
+                    <!--</p>-->
                 </div>
              </div>
                  <% }); %>
